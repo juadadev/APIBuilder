@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from app.domain.inotification import INotification
+from typing import List
+from app.domain.email_notification import EmailNotification
 from ...schemas.priority import Priority
 
 
@@ -17,15 +18,15 @@ class IEmailNotificationBuilder(ABC):
         pass
 
     @abstractmethod
-    def set_cc(self, cc: list) -> "IEmailNotificationBuilder":
+    def set_cc(self, cc: list[str]) -> "IEmailNotificationBuilder":
         pass
 
     @abstractmethod
-    def set_bcc(self, bcc: list) -> "IEmailNotificationBuilder":
+    def set_bcc(self, bcc: list[str]) -> "IEmailNotificationBuilder":
         pass
 
     @abstractmethod
-    def set_attachments(self, attachments: list) -> "IEmailNotificationBuilder":
+    def set_attachments(self, attachments: List) -> "IEmailNotificationBuilder":
         pass
 
     @abstractmethod
@@ -33,5 +34,5 @@ class IEmailNotificationBuilder(ABC):
         pass
 
     @abstractmethod
-    def build(self) -> INotification:
+    def build(self) -> EmailNotification:
         pass
