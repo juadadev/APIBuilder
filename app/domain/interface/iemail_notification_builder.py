@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
-from app.domain.email_notification import EmailNotification
+
+from ...domain.email_notification import EmailNotification
 from ...schemas.priority import Priority
 
 
@@ -26,7 +27,7 @@ class IEmailNotificationBuilder(ABC):
         pass
 
     @abstractmethod
-    def set_attachments(self, attachments: List) -> "IEmailNotificationBuilder":
+    def set_attachments(self, attachment: List) -> "IEmailNotificationBuilder":
         pass
 
     @abstractmethod

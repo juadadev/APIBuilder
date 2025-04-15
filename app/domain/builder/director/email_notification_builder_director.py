@@ -1,8 +1,9 @@
 from typing import List, Optional
 
 from app.schemas.email_request import EmailRequest
-from ...interface.iemail_notification_builder import IEmailNotificationBuilder
 from app.schemas.priority import Priority
+
+from ...interface.iemail_notification_builder import IEmailNotificationBuilder
 
 
 class EmailNotificationBuilderDirector:
@@ -14,7 +15,7 @@ class EmailNotificationBuilderDirector:
             self._builder.set_to(email_request.to)
             .set_subject("Pago confirmado")
             .set_body(
-                f"Notificación via {email_request.notification_type.value} de Pago por ${email_request.amount:.2f} con {email_request.payment_method.value} confirmado."
+                f"Pago por ${email_request.amount:.2f} con {email_request.payment_method.value} confirmado. NOTIFICACION: {email_request.notification_type.value}"
             )
             .set_priority(Priority.ALTA)
             .build()
