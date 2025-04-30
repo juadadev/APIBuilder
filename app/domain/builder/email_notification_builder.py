@@ -1,4 +1,5 @@
 from typing import List, Optional
+
 from app.domain.email_notification import EmailNotification
 from app.domain.interface.iemail_notification_builder import IEmailNotificationBuilder
 from app.schemas.priority import Priority

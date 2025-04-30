@@ -5,6 +5,7 @@ from ...domain.email_notification import EmailNotification
 from ...schemas.priority import Priority
 
 
+# Interface
 class IEmailNotificationBuilder(ABC):
     @abstractmethod
     def set_to(self, to: str) -> "IEmailNotificationBuilder":
@@ -27,7 +28,7 @@ class IEmailNotificationBuilder(ABC):
         pass
 
     @abstractmethod
-    def set_attachments(self, attachment: List) -> "IEmailNotificationBuilder":
+    def set_attachments(self, attachment: List[str]) -> "IEmailNotificationBuilder":
         pass
 
     @abstractmethod
