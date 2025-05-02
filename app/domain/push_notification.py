@@ -1,21 +1,13 @@
-from typing import Optional
+from dataclasses import dataclass
 
 from app.schemas.priority import PriorityPush
 
 
+@dataclass()
 class PUSHNotification:
-    def __init__(
-        self,
-        device_token: str,
-        priority: PriorityPush,
-        title: Optional[str] = None,
-        message: Optional[str] = None,
-        image_url: Optional[str] = None,
-        click_action: Optional[str] = None,
-    ):
-        self._device_token = device_token
-        self._title = title
-        self._message = message
-        self._priority = priority
-        self._image_url = image_url
-        self._click_action = click_action
+    device_token: str
+    priority: PriorityPush
+    title: str | None = None
+    message: str | None = None
+    image_url: str | None = None
+    click_action: str | None = None

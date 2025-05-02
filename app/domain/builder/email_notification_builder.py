@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 from app.domain.email_notification import EmailNotification
 from app.domain.interface.iemail_notification_builder import IEmailNotificationBuilder
 from app.schemas.priority import Priority
@@ -7,13 +5,13 @@ from app.schemas.priority import Priority
 
 class EmailNotificationBuilder(IEmailNotificationBuilder):
     def __init__(self):
-        self._to: Optional[str] = None
-        self._subject: Optional[str] = None
-        self._body: Optional[str] = None
-        self._cc: List[str] = []
-        self._bcc: List[str] = []
-        self._attachments: List[str] = []
-        self._priority: Optional[Priority] = None
+        self._to: str | None = None
+        self._subject: str | None = None
+        self._body: str | None = None
+        self._cc: list[str] = []
+        self._bcc: list[str] = []
+        self._attachments: list[str] = []
+        self._priority: Priority | None = None
 
     def set_to(self, to: str) -> IEmailNotificationBuilder:
         self._to = to
@@ -27,15 +25,15 @@ class EmailNotificationBuilder(IEmailNotificationBuilder):
         self._body = body
         return self
 
-    def set_cc(self, cc: List[str]) -> IEmailNotificationBuilder:
+    def set_cc(self, cc: list[str]) -> IEmailNotificationBuilder:
         self._cc = cc
         return self
 
-    def set_bcc(self, bcc: List[str]) -> IEmailNotificationBuilder:
+    def set_bcc(self, bcc: list[str]) -> IEmailNotificationBuilder:
         self._bcc = bcc
         return self
 
-    def set_attachments(self, attachments: List[str]) -> IEmailNotificationBuilder:
+    def set_attachments(self, attachments: list[str]) -> IEmailNotificationBuilder:
         self._attachments = attachments
         return self
 
@@ -45,7 +43,7 @@ class EmailNotificationBuilder(IEmailNotificationBuilder):
 
     def build(self) -> EmailNotification:
         if not self._to:
-            raise ValueError("El correo destinatario es obligatorio")
+            raise ValueError('El correo destinatario es obligatorio')
 
         return EmailNotification(
             to=self._to,

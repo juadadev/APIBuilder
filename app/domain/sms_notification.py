@@ -1,15 +1,14 @@
 from datetime import datetime
-from typing import Optional
 
 
 class SMSNotification:
     def __init__(
         self,
         phone_number: str,
-        message: Optional[str] = None,
-        sender_id: Optional[str] = None,
-        delivery_report_required: Optional[bool] = None,
-        schedule_time: Optional[datetime] = None,
+        message: str | None = None,
+        sender_id: str | None = None,
+        delivery_report_required: bool | None = None,
+        schedule_time: datetime | None = None,
     ):
         self._phone_number = phone_number
         self._message = message
