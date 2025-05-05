@@ -1,4 +1,4 @@
-from app.core.config import SMTP_EMAIL, SMTP_HOST, SMTP_PASSWORD, SMTP_PORT
+from app.core.config import Config
 from app.domain.builder.director.email_notification_builder_director import (
     EmailNotificationBuilderDirector,
 )
@@ -6,6 +6,8 @@ from app.domain.builder.email_notification_builder import EmailNotificationBuild
 from app.domain.templates.purchase_summary_template import PurchaseSummaryTemplate
 from app.schemas.email_request import EmailRequest
 from app.services.email_sender import EmailSender
+
+config = Config()
 
 
 class EmailNotificationService:
@@ -21,7 +23,9 @@ class EmailNotificationService:
         html_body = template.render(body=notification.body)
 
         # Enviar correo
-        sender = EmailSender(SMTP_HOST, SMTP_PORT, SMTP_EMAIL, SMTP_PASSWORD)
+        sender = EmailSender(
+            config.SMTP_HOST, config.SMTP_PORT, config.SMTP_EMAIL, config.SMTP_PASSWORD
+        )
         sender.send_email(
             recipient=email_request.to,
             subject=notification.subject or 'Sin asunto',

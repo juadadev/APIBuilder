@@ -1,12 +1,23 @@
 import os
 
-from typing import cast
+from typing import Optional
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-SMTP_EMAIL = cast(str, os.getenv('SMTP_EMAIL'))
-SMTP_PASSWORD = cast(str, os.getenv('SMTP_PASSWORD'))
-SMTP_HOST = cast(str, os.getenv('SMTP_HOST'))
-SMTP_PORT = cast(int, os.getenv('SMTP_PORT'))
+
+class Config:
+    _instance: Optional['Config'] = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance._load()
+        return cls._instance
+
+    def _load(self):
+        self.SMTP_EMAIL = os.getenv('SMTP_EMAIL', '')
+        self.SMTP_PASSWORD = os.getenv('SMTP_PASSWORD', '')
+        self.SMTP_HOST = os.getenv('SMTP_HOST', '')
+        self.SMTP_PORT = int(os.getenv('SMTP_PORT', '587'))
